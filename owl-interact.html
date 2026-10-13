@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猫头鹰互动</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{height:100%;}
+        body{
+            width:100vw;height:100vh;
+            overflow:hidden;
+            font-family:sans-serif;
+            background-image:url("img/owl-illustration.jpg");
+            background-size:cover;
+            background-position:center;
+        }
+        .back-btn{
+            position:absolute;
+            top:20px;left:20px;
+            font-size:18px;
+            color:#fff;
+            z-index:999;
+            background:rgba(0,0,0,0.45);
+            padding:8px 16px;
+            border-radius:20px;
+            text-decoration:none;
+        }
+        .back-photo{
+            position:absolute;
+            top:20px;right:20px;
+            font-size:18px;
+            color:#fff;
+            z-index:999;
+            background:rgba(0,0,0,0.45);
+            padding:8px 16px;
+            border-radius:20px;
+            text-decoration:none;
+        }
+        .action-video{
+            position:absolute;
+            top:0;left:0;
+            width:100vw;height:100vh;
+            object-fit:cover;
+            z-index:8;
+            display:none;
+        }
+        .hotspot{
+            position:absolute;
+            background:transparent;
+            z-index:9;
+        }
+        /* 嘴（吃）：覆盖猫头鹰头部，大一点 */
+        .eat-hotspot{ left:35%; top:25%; width:30%; height:35%; cursor:pointer; }
+        /* 脚（睡）：覆盖猫头鹰脚部/树枝，大一点 */
+        .sleep-hotspot{ left:30%; top:60%; width:40%; height:28%; cursor:pointer; }
+        .tip{
+            position:absolute;
+            bottom:6%;left:50%;transform:translateX(-50%);
+            color:#fff;font-size:14px;text-shadow:0 1px 4px rgba(0,0,0,0.6);
+            z-index:10;pointer-events:none;
+        }
+    </style>
+</head>
+<body class="interact-page" id="owlInteract">
+    <a href="owl.html" class="back-btn">返回放大镜</a >
+    <a href="forest.html" class="back-photo">回栖息地</a >
+    <video class="action-video" id="actionVideo" muted></video>
+
+    <div class="hotspot eat-hotspot" onclick="playAction('eat')"></div>
+    <div class="hotspot sleep-hotspot" onclick="playAction('sleep')"></div>
+
+    <div class="tip">点嘴=动起来 · 点脚=躺下 · 再点空白恢复</div>
+
+    <script>
+        var video = document.getElementById('actionVideo');
+
+        function playAction(type){
+            if (type === 'eat') {
+                video.src = 'video/owl-eat.mp4';
+                video.loop = true;
+            } else {
+                video.src = 'video/owl-sleep.mp4';
+                video.loop = false;
+            }
+            video.style.display = 'block';
+            video.play();
+        }
+
+        document.addEventListener('click', function(e){
+            if (e.target.classList.contains('hotspot') || e.target.classList.contains('back-btn') || e.target.classList.contains('back-photo')) return;
+            video.pause();
+            video.style.display = 'none';
+            video.loop = false;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蜗牛详情</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{height:100%;}
+        body{
+            width:100vw;height:100vh;
+            overflow:hidden;
+            font-family:sans-serif;
+            background-image:url("img/snail-photo.jpg");
+            background-size:cover;
+            background-position:center;
+            cursor:pointer;
+        }
+        .back-btn{
+            position:absolute;
+            top:20px;right:20px;
+            font-size:18px;
+            color:#fff;
+            z-index:999;
+            background:rgba(0,0,0,0.45);
+            padding:8px 16px;
+            border-radius:20px;
+            text-decoration:none;
+        }
+        .lens{
+            position:absolute;
+            width:300px;height:300px;
+            border-radius:50%;
+            overflow:hidden;
+            box-shadow:0 0 0 4px rgba(255,255,255,0.95),0 12px 30px rgba(0,0,0,0.5);
+            pointer-events:none;
+            opacity:0;
+            transform:translate(-50%,-50%);
+            transition:opacity .15s ease;
+            z-index:5;
+            background:#000;
+        }
+        body.lens-on .lens{ opacity:1; }
+        .lens-inner{
+            position:absolute;
+            top:0;left:0;
+            background-image:url("img/snail-illustration.jpg");
+            background-size:100% 100%;
+            background-position:0 0;
+            background-repeat:no-repeat;
+        }
+        .lens-inner .info{
+            position:absolute;
+            top:35%;
+            left:38%;
+            width:20%;
+            height:25%;
+            padding:14px 16px;
+            background:rgba(0,0,0,0.6);
+            color:#fff;
+            border-radius:12px;
+            border:1px solid rgba(255,255,255,0.25);
+            font-size:13px;
+            line-height:1.6;
+            overflow:auto;
+            box-shadow:0 8px 20px rgba(0,0,0,0.35);
+        }
+        .lens-inner .info h3{
+            font-size:18px;
+            margin-bottom:8px;
+            padding-bottom:6px;
+            border-bottom:1px solid rgba(255,255,255,0.3);
+        }
+        .lens-inner .info p{
+            margin-bottom:6px;
+        }
+        .lens-inner .info p b{
+            color:#ffd27f;
+        }
+        .tip{
+            position:absolute;
+            bottom:8%;left:50%;transform:translateX(-50%);
+            color:#fff;font-size:14px;text-shadow:0 1px 4px rgba(0,0,0,0.6);
+            z-index:10;pointer-events:none;
+        }
+    </style>
+</head>
+<body class="snail-page" id="snailPage">
+    <a href="lake.html" class="back-btn">返回</a >
+    <div class="lens" id="lens">
+        <div class="lens-inner" id="lensInner">
+            <div class="info">
+                <h3>蜗牛</h3>
+                <p><b>识别特点：</b>身体软软的，背着螺旋形外壳，壳上有青绿棕褐相间的纹理，有两对触角。</p >
+                <p><b>栖息地：</b>潮湿的草地、花园、树丛下。</p >
+                <p><b>小亮点：</b>背上的壳是它的小房子，能缩进去保护自己，爬过的地方会留下亮亮的黏液线。</p >
+                <p><b>食物：</b>吃植物叶子、嫩芽和腐烂的植物。</p >
+                <p><b>习性：</b>喜欢潮湿阴凉的地方，多在雨后出来活动，爬行速度很慢。</p >
+            </div>
+        </div>
+    </div>
+    <div class="tip">移动鼠标用放大镜观察插画与简介 · 点击进入互动</div>
+
+    <script>
+        var lens = document.getElementById('lens');
+        var lensInner = document.getElementById('lensInner');
+        var body = document.getElementById('snailPage');
+        var lensSize = 300;
+        var half = lensSize / 2;
+        var bgW = 0, bgH = 0, vw = 0, vh = 0;
+
+        function calcCover(){
+            vw = window.innerWidth;
+            vh = window.innerHeight;
+            var img = new Image();
+            img.onload = function(){
+                var iw = img.width, ih = img.height;
+                var scale = Math.max(vw/iw, vh/ih);
+                bgW = Math.round(iw * scale);
+                bgH = Math.round(ih * scale);
+                lensInner.style.width = bgW + 'px';
+                lensInner.style.height = bgH + 'px';
+            };
+            img.src = 'img/snail-illustration.jpg';
+        }
+        calcCover();
+        window.addEventListener('resize', calcCover);
+
+        window.addEventListener('mousemove', function(e){
+            if(bgW <= 0) return;
+            var mx = e.clientX, my = e.clientY;
+            lens.style.left = mx + 'px';
+            lens.style.top  = my + 'px';
+            var imgLeft = (vw - bgW) / 2;
+            var imgTop  = (vh - bgH) / 2;
+            lensInner.style.left = (imgLeft - mx + half) + 'px';
+            lensInner.style.top  = (imgTop  - my + half) + 'px';
+            body.classList.add('lens-on');
+        });
+
+        document.addEventListener('mouseleave', function(){
+            body.classList.remove('lens-on');
+        });
+
+        document.addEventListener('click', function(e){
+            if (e.target.classList.contains('back-btn')) return;
+            window.location.href = 'snail-interact.html';
+        });
+    </script>
+</body>
+</html>

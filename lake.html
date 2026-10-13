@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湖泊栖息地</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{height:100%;}
+        body{
+            width:100vw;height:100vh;
+            overflow:hidden;
+            font-family:sans-serif;
+            background-image:url("img/lake-bg-photo.jpg");
+            background-size:cover;
+            background-position:center;
+        }
+
+        .back-btn{
+            position:absolute;
+            top:20px;left:20px;
+            font-size:18px;
+            color:#fff;
+            z-index:999;
+            background:rgba(0,0,0,0.45);
+            padding:8px 16px;
+            border-radius:20px;
+            text-decoration:none;
+        }
+
+        /* ===== 放大镜 ===== */
+        .lens{
+            position:absolute;
+            width:280px;
+            height:280px;
+            border-radius:50%;
+            background-image:url("img/lake-bg-illustration.jpg");
+            background-repeat:no-repeat;
+            background-position:0px 0px;
+            box-shadow:0 0 0 4px rgba(255,255,255,0.95),0 12px 30px rgba(0,0,0,0.5);
+            pointer-events:none;
+            opacity:0;
+            transform:translate(-50%,-50%);
+            transition:opacity .15s ease;
+            z-index:2;
+        }
+        body.lens-on .lens{ opacity:1; }
+
+        /* ===== 透明按键 ===== */
+        .hotspot{
+            position:absolute;
+            cursor:pointer;
+            border:none;
+            background:transparent;
+            z-index:6;
+        }
+        .crane{ width:340px; height:420px; top:30%; left:6%; }
+        .fish{ width:260px; height:170px; top:55%; left:45%; }
+        /* 蜗牛：再向右移 */
+        .snail{ width:520px; height:380px; bottom:6%; left:68%; }
+    </style>
+</head>
+<body class="page-lake" id="lakePage">
+    <a href="animalMap.html" class="back-btn">返回</a >
+
+    <div class="lens" id="lens"></div>
+
+    <!-- 三个透明按键 -->
+    <div class="hotspot crane" onclick="location.href='crane.html'"></div>
+    <div class="hotspot fish" onclick="location.href='fish.html'"></div>
+    <div class="hotspot snail" onclick="location.href='snail.html'"></div>
+
+    <script>
+        var lens = document.getElementById('lens');
+        var body = document.getElementById('lakePage');
+        var lensSize = 280;
+
+        var vw = window.innerWidth;
+        var vh = window.innerHeight;
+        lens.style.backgroundSize = vw + 'px ' + vh + 'px';
+
+        window.addEventListener('mousemove', function(e){
+            lens.style.left = e.clientX + 'px';
+            lens.style.top  = e.clientY + 'px';
+
+            var bgX = (lensSize / 2) - e.clientX;
+            var bgY = (lensSize / 2) - e.clientY;
+            lens.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
+
+            body.classList.add('lens-on');
+        });
+
+        document.addEventListener('mouseleave', function(){
+            body.classList.remove('lens-on');
+        });
+    </script>
+</body>
+</html>

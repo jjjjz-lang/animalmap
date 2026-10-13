@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动物观察地图</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{height:100%;}
+        body{
+            width:100vw;height:100vh;
+            overflow:hidden;
+            font-family:sans-serif;
+            background-image:url("img/forest-bg.jpg");
+            background-size:cover;
+            background-position:center;
+        }
+
+        /* 返回按钮：左上角 */
+        .back-btn{
+            position:absolute;
+            top:20px;left:20px;
+            font-size:18px;
+            color:#fff;
+            z-index:999;
+            background:rgba(0,0,0,0.45);
+            padding:8px 16px;
+            border-radius:20px;
+            text-decoration:none;
+        }
+
+        /* ===== 三个透明可点击区：按图片景观分配高度 ===== */
+        .map-container{
+            position:absolute;
+            top:0;left:0;right:0;
+            height:100%;
+            z-index:5;
+        }
+        .map-block{
+            width:100%;
+            cursor:pointer;
+        }
+        /* 冰川：上部雪山区域，占 42% */
+        .glacier-block{ position:absolute; top:0; height:42%; }
+        /* 森林：中部针叶林区域，占 35% */
+        .forest-block{ position:absolute; top:42%; height:35%; }
+        /* 湖泊：下部湖水区域，占 23% */
+        .lake-block{ position:absolute; bottom:0; height:23%; }
+
+        /* ===== 开场脚印动画 ===== */
+        .footstep-intro{
+            position:absolute;
+            left:50%;bottom:20%;
+            transform:translateX(-50%);
+            width:80%;max-width:600px;
+            height:200px;
+            z-index:800;
+            pointer-events:none;
+            animation: footstepFadeOut 1.2s ease-in-out 3.2s forwards;
+        }
+        .footstep{
+            position:absolute;
+            bottom:0;
+            font-size:48px;
+            opacity:0;
+            animation-name:footstepIn;
+            animation-duration:0.8s;
+            animation-fill-mode:forwards;
+            filter:drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+        }
+        .step-1{ left:0%;   animation-delay:0.2s; }
+        .step-2{ left:18%;  animation-delay:0.6s; }
+        .step-3{ left:36%;  animation-delay:1.0s; }
+        .step-4{ left:54%;  animation-delay:1.4s; }
+        .step-5{ left:72%;  animation-delay:1.8s; }
+        @keyframes footstepIn{
+            0%{ opacity:0; transform:translateY(30px) scale(0.6) rotate(-10deg); }
+            60%{ opacity:1; transform:translateY(-8px) scale(1.15) rotate(5deg); }
+            100%{ opacity:1; transform:translateY(0) scale(1) rotate(0deg); }
+        }
+        @keyframes footstepFadeOut{
+            0%{ opacity:1; }
+            100%{ opacity:0; visibility:hidden; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">返回</a >
+
+    <!-- 开场脚印 -->
+    <div class="footstep-intro">
+        <span class="footstep step-1">🐾</span>
+        <span class="footstep step-2">🐾</span>
+        <span class="footstep step-3">🐾</span>
+        <span class="footstep step-4">🐾</span>
+        <span class="footstep step-5">🐾</span>
+    </div>
+
+    <!-- 三个透明可点击区：上=冰川，中=森林，下=湖泊 -->
+    <div class="map-container">
+        <div class="map-block glacier-block" onclick="location.href='glacier.html'"></div>
+        <div class="map-block forest-block" onclick="location.href='forest.html'"></div>
+        <div class="map-block lake-block" onclick="location.href='lake.html'"></div>
+    </div>
+</body>
+</html>

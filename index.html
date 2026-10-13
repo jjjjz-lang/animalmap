@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动物观察所</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{height:100%;}
+
+        /* 实物照片直接作为整个页面的背景 */
+        body{
+            width:100vw;
+            height:100vh;
+            overflow:hidden;
+            background-image:url("img/index-bg-photo.jpg");
+            background-size:cover;
+            background-position:center;
+        }
+
+        /* ===== 文字+按钮：正中央 ===== */
+        .page-index{
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-direction:column;
+            text-align:center;
+            position:relative;
+        }
+        .title-box{
+    position:relative;
+    z-index:10;   /* 比放大镜(2)高得多，文字永远在最上面 */
+}
+.title-box h1{
+    font-size:48px;
+    color:#fff;
+    margin-bottom:30px;
+    text-shadow:0 3px 10px rgba(0,0,0,0.5);
+}
+        .title-box h1{
+            font-size:48px;
+            color:#fff;
+            margin-bottom:30px;
+            text-shadow:0 3px 10px rgba(0,0,0,0.5);
+        }
+        .go-btn{
+            font-size:36px;
+            padding:12px 34px;
+            background:#fff;
+            border-radius:8px;
+            text-decoration:none;
+            color:#333;
+            display:inline-block;
+            transition:transform .25s ease, box-shadow .25s ease;
+        }
+        .go-btn:hover{
+            transform:scale(1.05);
+            box-shadow:0 6px 16px rgba(0,0,0,0.15);
+        }
+        .go-btn:active{ transform:scale(0.96); }
+
+        /* ===== 放大镜：显示插画局部 ===== */
+        .lens{
+            position:absolute;
+            width:260px;
+            height:260px;
+            border-radius:50%;
+            background-image:url("img/index-bg-illustration.jpg");
+            background-repeat:no-repeat;
+            background-position:0px 0px;
+            box-shadow:0 0 0 4px rgba(255,255,255,0.95),0 12px 30px rgba(0,0,0,0.5);
+            pointer-events:none;
+            opacity:0;
+            transform:translate(-50%,-50%);
+            transition:opacity .15s ease;
+            z-index:2;   /* 只盖在背景上，盖不住文字 */
+        }
+        body.lens-on .lens{ opacity:1; }
+    </style>
+</head>
+<body class="page-index" id="homePage">
+    <!-- 放大镜 -->
+    <div class="lens" id="lens"></div>
+
+    <div class="title-box">
+        <h1>动物观察所</h1>
+        <a href="animalMap.html" class="go-btn">GO</a >
+    </div>
+
+    <script>
+        var lens = document.getElementById('lens');
+        var body = document.getElementById('homePage');
+        var lensSize = 260;
+
+        var vw = window.innerWidth;
+        var vh = window.innerHeight;
+        lens.style.backgroundSize = vw + 'px ' + vh + 'px';
+
+        window.addEventListener('mousemove', function(e){
+            lens.style.left = e.clientX + 'px';
+            lens.style.top  = e.clientY + 'px';
+
+            var bgX = (lensSize / 2) - e.clientX;
+            var bgY = (lensSize / 2) - e.clientY;
+            lens.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
+
+            body.classList.add('lens-on');
+        });
+
+        document.addEventListener('mouseleave', function(){
+            body.classList.remove('lens-on');
+        });
+    </script>
+</body>
+</html>
