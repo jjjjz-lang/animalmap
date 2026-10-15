@@ -38,7 +38,7 @@
             text-decoration:none;
         }
         /* 全屏视频：和背景一样大，铺满整个页面 */
-        .action-video{
+        .action-{
             position:absolute;
             top:0;left:0;
             width:100vw;height:100vh;
@@ -67,7 +67,7 @@
 <body class="interact-page" id="penguin1Interact">
     <a href="penguin1.html" class="back-btn">返回放大镜</a >
     <a href="glacier.html" class="back-photo">回栖息地</a >
-    <video class="action-video" id="actionVideo" muted></video>
+    < class="action-" id="action" muted></>
 
     <div class="hotspot eat-hotspot" onclick="playAction('eat')"></div>
     <div class="hotspot sleep-hotspot" onclick="playAction('sleep')"></div>
@@ -75,26 +75,26 @@
     <div class="tip">点嘴=动起来 · 点脚=躺下 · 再点空白恢复</div>
 
     <script>
-        var video = document.getElementById('actionVideo');
+        var  = document.getElementById('action');
 
         function playAction(type){
             if (type === 'eat') {
-                video.src = 'video/penguin1-eat.mp4';
-                video.loop = true;      // 吃：循环动起来
+                .src = '/penguin1-eat.mp4';
+                .loop = true;      // 吃：循环动起来
             } else {
-                video.src = 'video/penguin1-sleep.mp4';
-                video.loop = false;     // 睡：躺下定格
+                .src = '/penguin1-sleep.mp4';
+                .loop = false;     // 睡：躺下定格
             }
-            video.style.display = 'block';
-            video.play();
+            .style.display = 'block';
+            .play();
         }
 
         // 再点一下（空白处）恢复背景页原样
         document.addEventListener('click', function(e){
             if (e.target.classList.contains('hotspot') || e.target.classList.contains('back-btn') || e.target.classList.contains('back-photo')) return;
-            video.pause();
-            video.style.display = 'none';
-            video.loop = false;
+            .pause();
+            .style.display = 'none';
+            .loop = false;
         });
     </script>
 </body>
