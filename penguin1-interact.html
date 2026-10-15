@@ -18,77 +18,60 @@
         .backBtn{
             position:absolute;
             top:20px;left:20px;
-            font-size:18px;
-            color:#FFF;
-            z-index:999;
+            font-size:18px;color:#FFF;z-index:999;
             background:rgba(0,0,0,0.45);
-            padding:8px 16px;
-            border-radius:20px;
-            text-decoration:none;
+            padding:8px 16px;border-radius:20px;text-decoration:none;
         }
         .backPhoto{
             position:absolute;
             top:20px;right:20px;
-            font-size:18px;
-            color:#FFF;
-            z-index:999;
+            font-size:18px;color:#FFF;z-index:999;
             background:rgba(0,0,0,0.45);
-            padding:8px 16px;
-            border-radius:20px;
-            text-decoration:none;
+            padding:8px 16px;border-radius:20px;text-decoration:none;
         }
         .action-{
             position:absolute;
             top:0;left:0;
             width:100%;height:100vh;
             object-fit:cover;
-            z-index:8;
-            display:none;
+            z-index:8;display:none;
         }
-        .hotspot{
-            position:absolute;
-            background:transparent;
-            z-index:9;
-        }
-        .eatHotspot{ width:260px; height:120px; top:35%; left:25%; cursor:pointer; }
-        .sleepHotspot{ width:160px; height:140px; top:70%; left:28%; cursor:pointer; }
+        .hotspot{position:absolute;background:transparent;z-index:9;}
+        .eatHotspot{width:260px;height:120px;top:35%;left:25%;cursor:pointer;}
+        .sleepHotspot{width:160px;height:140px;top:70%;left:28%;cursor:pointer;}
         .tip{
-            position:absolute;
-            bottom:6%;left:50%;transform:translateX(-50%);
-            color:#FFF;font-size:14px;text-shadow:0 1px 4px rgba(0,0,0,0.6);
+            position:absolute;bottom:6%;left:50%;transform:translateX(-50%);
+            color:#FFF;font-size:14px;
+            text-shadow:0 1px 4px rgba(0,0,0,0.6);
             z-index:10;pointer-events:none;
         }
     </style>
 </head>
 <body>
-    <a href=" " class="backBtn">返回放大镜</a >
+    <a href="penguin1.html " class="backBtn">返回放大镜</a >
     <a href="glacier.html" class="backPhoto">栖息地</a >
     <video class="action-" id="action" muted></video>
-
     <div class="hotspot eatHotspot" onclick="playAction('eat')"></div>
     <div class="hotspot sleepHotspot" onclick="playAction('sleep')"></div>
     <div class="tip">点嘴=动起来 · 点脚=躺下 · 再点空白恢复</div>
-
     <script>
         var video = document.getElementById("action");
-
         function playAction(type){
-            if (type === "eat") {
-                video.src = "penguin1-eat.mp4";
-                video.loop = true;
-            } else {
-                video.src = "penguin1-sleep.mp4";
-                video.loop = false;
+            if(type==="eat"){
+                video.src="penguin1-eat.mp4";
+                video.loop=true;
+            }else{
+                video.src="penguin1-sleep.mp4";
+                video.loop=false;
             }
-            video.style.display = "block";
+            video.style.display="block";
             video.play();
         }
-
-        document.addEventListener("click", function(e){
-            if (!e.target.classList.contains("hotspot") && !e.target.classList.contains("backBtn") && !e.target.classList.contains("backPhoto")) {
+        document.addEventListener("click",function(e){
+            if(!e.target.classList.contains("hotspot")&&!e.target.classList.contains("backBtn")&&!e.target.classList.contains("backPhoto")){
                 video.pause();
-                video.style.display = "none";
-                video.loop = false;
+                video.style.display="none";
+                video.loop=false;
             }
         });
     </script>
