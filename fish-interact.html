@@ -50,10 +50,10 @@
             background:transparent;
             z-index:9;
         }
-        /* 头（吃）：覆盖鱼头部，大一点 */
-        .eat-hotspot{ left:30%; top:35%; width:30%; height:28%; cursor:pointer; }
-        /* 脚（睡）：覆盖鱼身下方水域，大一点 */
-        .sleep-hotspot{ left:35%; top:60%; width:38%; height:25%; cursor:pointer; }
+        /* 嘴（吃）：鱼头 */
+        .eat-hotspot{ width:14%; height:20%; top:47%; left:47%; cursor:pointer; }
+        /* 脚（睡）：鱼身+尾巴 */
+        .sleep-hotspot{ width:16%; height:20%; top:49%; left:39%; cursor:pointer; }
         .tip{
             position:absolute;
             bottom:6%;left:50%;transform:translateX(-50%);
@@ -77,10 +77,10 @@
 
         function playAction(type){
             if (type === 'eat') {
-                video.src = 'video/fish-eat.mp4';
+                video.src = 'fish-eat.mp4';
                 video.loop = true;
             } else {
-                video.src = 'video/fish-sleep.mp4';
+                video.src = 'fish-sleep.mp4';
                 video.loop = false;
             }
             video.style.display = 'block';
