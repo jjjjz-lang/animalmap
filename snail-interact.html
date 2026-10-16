@@ -50,10 +50,10 @@
             background:transparent;
             z-index:9;
         }
-        /* 头（吃）：左79% 上35% */
-        .eat-hotspot{ left:79%; top:35%; width:9%; height:15%; cursor:pointer; }
-        /* 脚（睡）：左62% 上50% */
-        .sleep-hotspot{ left:62%; top:50%; width:12%; height:15%; cursor:pointer; }
+        /* 嘴（吃）：头 水平27~30cm 垂直9~12cm */
+        .eat-hotspot{ width:9%; height:15%; top:45%; left:79%; cursor:pointer; }
+        /* 脚（睡）：脚 水平21~24cm 垂直13~15cm */
+        .sleep-hotspot{ width:9%; height:10%; top:65%; left:62%; cursor:pointer; }
         .tip{
             position:absolute;
             bottom:6%;left:50%;transform:translateX(-50%);
@@ -77,10 +77,10 @@
 
         function playAction(type){
             if (type === 'eat') {
-                video.src = 'video/snail-eat.mp4';
+                video.src = 'snail-eat.mp4';
                 video.loop = true;
             } else {
-                video.src = 'video/snail-sleep.mp4';
+                video.src = 'snail-sleep.mp4';
                 video.loop = false;
             }
             video.style.display = 'block';
