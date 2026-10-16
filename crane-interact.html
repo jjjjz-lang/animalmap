@@ -50,10 +50,10 @@
             background:transparent;
             z-index:9;
         }
-        /* 头（吃）：覆盖鹤头部/黄喙，大一点 */
-        .eat-hotspot{ left:38%; top:18%; width:32%; height:30%; cursor:pointer; }
-        /* 脚（睡）：覆盖鹤长腿/水滩，大一点 */
-        .sleep-hotspot{ left:32%; top:55%; width:38%; height:30%; cursor:pointer; }
+        /* 嘴（吃）：头 水平13~18cm 垂直5~9cm */
+        .eat-hotspot{ width:15%; height:20%; top:25%; left:38%; cursor:pointer; }
+        /* 脚（睡）：脚 水平11~15cm 垂直13~17cm */
+        .sleep-hotspot{ width:12%; height:20%; top:65%; left:32%; cursor:pointer; }
         .tip{
             position:absolute;
             bottom:6%;left:50%;transform:translateX(-50%);
@@ -77,10 +77,10 @@
 
         function playAction(type){
             if (type === 'eat') {
-                video.src = 'video/crane-eat.mp4';
+                video.src = 'crane-eat.mp4';
                 video.loop = true;
             } else {
-                video.src = 'video/crane-sleep.mp4';
+                video.src = 'crane-sleep.mp4';
                 video.loop = false;
             }
             video.style.display = 'block';
