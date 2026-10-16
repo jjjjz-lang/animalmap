@@ -50,10 +50,10 @@
             background:transparent;
             z-index:9;
         }
-        /* 嘴（吃）：覆盖大象头部/象牙区域，大一点 */
-        .eat-hotspot{ left:28%; top:22%; width:44%; height:32%; cursor:pointer; }
-        /* 脚（睡）：覆盖大象脚部/地面，大一点 */
-        .sleep-hotspot{ left:22%; top:60%; width:56%; height:32%; cursor:pointer; }
+        /* 嘴（吃）：头 水平16~22cm 垂直6~13cm */
+        .eat-hotspot{ width:18%; height:35%; top:30%; left:47%; cursor:pointer; }
+        /* 脚（睡）：脚 水平13~20cm 垂直13~17cm */
+        .sleep-hotspot{ width:21%; height:20%; top:65%; left:38%; cursor:pointer; }
         .tip{
             position:absolute;
             bottom:6%;left:50%;transform:translateX(-50%);
@@ -77,10 +77,10 @@
 
         function playAction(type){
             if (type === 'eat') {
-                video.src = 'video/elephant-eat.mp4';
+                video.src = 'elephant-eat.mp4';
                 video.loop = true;
             } else {
-                video.src = 'video/elephant-sleep.mp4';
+                video.src = 'elephant-sleep.mp4';
                 video.loop = false;
             }
             video.style.display = 'block';
