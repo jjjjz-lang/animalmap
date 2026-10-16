@@ -50,10 +50,10 @@
             background:transparent;
             z-index:9;
         }
-        /* 嘴（吃）：覆盖狐狸头部，大一点 */
-        .eat-hotspot{ left:30%; top:18%; width:40%; height:30%; cursor:pointer; }
-        /* 脚（睡）：覆盖狐狸脚部/地面，大一点 */
-        .sleep-hotspot{ left:25%; top:62%; width:50%; height:28%; cursor:pointer; }
+        /* 嘴（吃）：头 水平11~15cm 垂直7~12cm */
+        .eat-hotspot{ width:12%; height:25%; top:35%; left:32%; cursor:pointer; }
+        /* 脚（睡）：脚 水平10~15cm 垂直14~18cm */
+        .sleep-hotspot{ width:15%; height:20%; top:70%; left:29%; cursor:pointer; }
         .tip{
             position:absolute;
             bottom:6%;left:50%;transform:translateX(-50%);
@@ -77,10 +77,10 @@
 
         function playAction(type){
             if (type === 'eat') {
-                video.src = 'video/fox-eat.mp4';
+                video.src = 'fox-eat.mp4';
                 video.loop = true;
             } else {
-                video.src = 'video/fox-sleep.mp4';
+                video.src = 'fox-sleep.mp4';
                 video.loop = false;
             }
             video.style.display = 'block';
